@@ -2,34 +2,26 @@
 <html>
   <head>
     <title>Twilio Example</title>
-    <meta name="description" content="A cool thing made with Glitch">
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta name="description" content="Example of Twilio SMS Frontend">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/368a2fe2-573d-4381-99db-202bf613f25e%2Fmobile-phone_1f4f1.png?1519849461027" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <h2>
-      Send a message to Patrick:
+      Send a message:
     </h2>
     <label>Number:</label><br>
-    <input id="number-input" type="tel"><br>
+    <input id="number-input" type="tel" value="+1"><br>
     <label>Message:</label><br>
     <textarea id="message-input"></textarea><br>
     <button id="send-message">Send</button>
     
-    <div id="messages">
-      
-    </div>
-
-    
-    
-    
-    
-    
-    
-    
+    <h3>
+      Message Log:
+    </h3>
+    <div id="messages"></div>
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>

@@ -1,6 +1,5 @@
-
-
 $(function() {
+  
   $( "#send-message" ).click(function( event ) {
     event.preventDefault();
     var sendData = {
@@ -8,44 +7,55 @@ $(function() {
       message: $( "#message-input" ).val()
     }
     
-    var success = function(data) {
+    var sendSuccess = function(data) {
       console.log(data);
-      $( "#number-input" ).val("");
+      $( "#number-input" ).val("+1");
       $( "#message-input" ).val("");
     }
     
-    var options = {
+    var sendOptions = {
       url:"/send",
       method: "POST",
       data: JSON.stringify(sendData),
     	contentType: "application/json; charset=utf-8",
 	    dataType: "json",
-      success: success
+      success: sendSuccess
     }
     
-    $.ajax(options);
+    $.ajax(sendOptions);
   });
   
   
   (function poll() {
+    
+    var pollOptions = {
+      url: "/replies",
+      success: pollSuccess,
+      dataType: "json",
+      complete: poll
+    }    
+    
+    var pollSuccess = function(data) {
+      var newHTML = "";
+      for (var p in data) {
+        var personMessages = data[p]
+        newHTML += "<h3>" + p + "</h3>";
+        newHTML += "<ol>"; 
+        for (var m in personMessages) {
+          var oneMessage = personMessages[m];
+          newHTML += "<li>" + oneMessage.type + ": " + oneMessage.message + "</li>";
+        }
+        newHTML += "</ol>";
+      }
+      $( "#messages" ).html(newHTML);
+    }
+    
     setTimeout(function() {
       console.log("Asking");
-      $.ajax({
-        url: "/replies",
-        success: function(data) {
-          var newHTML = "";
-          for (var p in data) {
-            var personMessages = data[p]
-            newHTML += "<h3>" + p + "</h3><ol>"; 
-            for (var m in personMessages) {
-              var oneMessage = personMessages[m];
-              newHTML += "<li>" + oneMessage.type + ": " + oneMessage.message + "</li>";
-            }
-            newHTML += "</ol>";
-          }
-          $( "#messages" ).html(newHTML);
-        }, dataType: "json", complete: poll
-      });
+      $.ajax(pollOptions);
     }, 1000);
+        
+    
   })();
+  
 });
