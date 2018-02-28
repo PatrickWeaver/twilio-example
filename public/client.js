@@ -28,13 +28,6 @@ $(function() {
   
   (function poll() {
     
-    var pollOptions = {
-      url: "/replies",
-      success: pollSuccess,
-      dataType: "json",
-      complete: poll
-    }    
-    
     var pollSuccess = function(data) {
       var newHTML = "";
       for (var p in data) {
@@ -50,12 +43,17 @@ $(function() {
       $( "#messages" ).html(newHTML);
     }
     
+    var pollOptions = {
+      url: "/messages",
+      success: pollSuccess,
+      dataType: "json",
+      complete: poll
+    }    
+    
     setTimeout(function() {
-      console.log("Asking");
       $.ajax(pollOptions);
     }, 1000);
-        
-    
+         
   })();
   
 });
