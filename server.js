@@ -7,6 +7,7 @@ app.use(express.static('public'));
 
 var accountSid = process.env.ACCOUNT_SID;
 var authToken = process.env.AUTHTOKEN;
+var fromNumber = process.env.FROM_TWILIO_NUMBER;
 
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
@@ -76,7 +77,7 @@ function sendSMS(message, toNumber, callback) {
   client.messages.create({
       body: message,
       to: toNumber,  // Text this number
-      from: process.env.FROM_TWILIO_NUMBER // From a valid Twilio number
+      from: fromNumber // From a valid Twilio number
   })
   .then(function(message) {
     toNumber = toNumber[0] === "+" ? toNumber : "+" + toNumber;
