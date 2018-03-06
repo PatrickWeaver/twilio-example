@@ -5,5 +5,5 @@ This app sends and receives SMS messages using Twilio. It stores sent/received m
 ### You will need to set values for the following environment variables:
 
 - ACCOUNT_SID -- Get this from Twilio it is a long alphanumeric string
-- AUTHTOKEN  -- Same as above
+- AUTHTOKEN  -- Also get this from Twilio, also a long alphanumeric string
 - FROM_TWILIO_NUMBER -- This is a phone number you bought on Twilio
